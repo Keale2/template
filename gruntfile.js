@@ -3,6 +3,16 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
+    babel: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        src: 'dist/js/main.js',
+        dest: 'dist/js/main.js'
+      }
+    },
+
     sass: {
       dev: {
         options: {
@@ -38,7 +48,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: 'app/js/**/*.js',
-        tasks: ['jshint', 'concat', 'captain_hook:dev']
+        tasks: ['jshint', 'concat', 'babel', 'captain_hook:dev']
       },
       html: {
         files: 'app/**/*.html',
@@ -124,8 +134,8 @@ module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', ['clean', 'copy', 'sass:dev', 'jshint', 'concat', 'autoprefixer:dev', 'captain_hook:dev', 'browserSync', 'watch']);
-  grunt.registerTask('dist', ['clean', 'copy', 'sass:dist', 'jshint', 'concat', 'autoprefixer:dist', 'uglify', 'captain_hook:dist']);
+  grunt.registerTask('default', ['clean', 'copy', 'sass:dev', 'jshint', 'concat', 'babel', 'autoprefixer:dev', 'captain_hook:dev', 'browserSync', 'watch']);
+  grunt.registerTask('dist', ['clean', 'copy', 'sass:dist', 'jshint', 'concat', 'babel', 'autoprefixer:dist', 'uglify', 'captain_hook:dist']);
 
 };
 
